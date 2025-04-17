@@ -1,0 +1,50 @@
+2. String Manipulation - Anagram Check 
+Write a Java program that takes two strings as input and checks if they are anagrams 
+(containing the same characters in a different order). 
+Example: 
+ 
+Input: "listen", "silent" 
+Output: true 
+Input: "hello", "world" 
+Output: false 
+
+
+import java.util.Scanner;
+public class EasyAnagramChecker {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input
+        System.out.print("Enter first string: ");
+        String str1 = scanner.nextLine().toLowerCase();
+
+        System.out.print("Enter second string: ");
+        String str2 = scanner.nextLine().toLowerCase();
+
+        // Output
+        System.out.println("Are the two strings anagrams? " + isAnagram(str1, str2));
+
+        scanner.close();
+    }
+
+    public static boolean isAnagram(String s1, String s2) {
+        // If lengths are different, they can't be anagrams
+        if (s1.length() != s2.length()) {
+            return false;
+        }
+
+        int[] count = new int[26]; // For 'a' to 'z'
+
+        for (int i = 0; i < s1.length(); i++) {
+            count[s1.charAt(i) - 'a']++; // Increment count for s1
+            count[s2.charAt(i) - 'a']--; // Decrement count for s2
+        }
+
+        // Check if all counts are 0
+        for (int c : count) {
+            if (c != 0) return false;
+        }
+
+        return true;
+    }
+}
